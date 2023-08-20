@@ -20,8 +20,9 @@ const DefaultLayout = dynamic(
 // import DefaultLayout from "@peersky/next-web3-chakra/layouts";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
+import { defaultMetaTags } from "../config";
 // import { WHITE_LOGO_W_TEXT_URL } from "../src/constants";
-const baseURL = "https://trir.xyz";
+const baseURL = process.env.NEXT_PUBLIC_SITE_URL;
 export default function CachingApp({ Component, pageProps }: any) {
   const [queryClient] = useState(new QueryClient());
 
@@ -72,14 +73,6 @@ export default function CachingApp({ Component, pageProps }: any) {
     // { rel: "preload", as: "image", href: WHITE_LOGO_W_TEXT_URL },
   ] as any;
   pageProps.preloads && headLinks.push(...pageProps.preloads);
-  const defaultMetaTags = {
-    title: "TriRatna - jewels of technology",
-    keywords: "blockchain, services",
-    description:
-      "End to end product development and blockchain solutions",
-    url: baseURL,
-    image: baseURL + "/logo.png",
-  };
   const metaTags = { ...defaultMetaTags, ...pageProps.metaTags };
   return (
     <>
