@@ -71,6 +71,10 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
             - name: Build & Export
+              env:
+                  NEXT_PUBLIC_ENGINE_GTAG: ${{ vars.NEXT_PUBLIC_ENGINE_GTAG }}
+                  NEXT_PUBLIC_HUBSPOT_FORM_ID: ${{ vars.NEXT_PUBLIC_HUBSPOT_FORM_ID }}
+                  NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
               run: ${{ steps.detect-package-manager.outputs.runner }} build
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v1
